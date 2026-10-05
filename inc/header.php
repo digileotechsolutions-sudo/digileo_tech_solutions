@@ -96,20 +96,34 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
     const loader = document.querySelector('.page-loader');
     if (!loader) return;
     let dismissed = false;
+    let hideTimer;
     let fallback;
-    const dismiss = () => {
+    const startedAt = performance.now();
+    const hide = () => {
       if (dismissed) return;
       dismissed = true;
+      clearTimeout(hideTimer);
       clearTimeout(fallback);
       loader.classList.add('is-hidden');
       setTimeout(() => loader.remove(), 500);
     };
+    const dismiss = (immediate = false) => {
+      if (dismissed) return;
+      if (immediate) {
+        hide();
+        return;
+      }
+      if (hideTimer) return;
+      const remaining = Math.max(0, 850 - (performance.now() - startedAt));
+      if (remaining) hideTimer = setTimeout(hide, remaining);
+      else hide();
+    };
+    fallback = setTimeout(hide, 8000);
     if (document.readyState === 'complete') {
       dismiss();
     } else {
       window.addEventListener('load', dismiss, { once: true });
-      window.addEventListener('error', dismiss, { once: true, capture: true });
-      fallback = setTimeout(dismiss, 8000);
+      window.addEventListener('error', () => dismiss(true), { once: true, capture: true });
     }
   })();
 </script>
