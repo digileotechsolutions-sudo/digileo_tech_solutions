@@ -4,7 +4,7 @@
     <div class="footer-grid">
       <div class="footer-about">
         <a href="<?= $basePath ?>index.php" class="logo">
-          <img src="<?= $basePath ?>images/DIGILEO%20LOGO.png" alt="Digileo Tech Solutions" loading="lazy" width="64" height="64">
+          <img src="<?= $basePath ?>images/DIGILEO%20LOGO.webp?v=2" alt="Digileo Tech Solutions" loading="lazy" decoding="async" width="1920" height="625">
         </a>
         <p>Digileo Tech Solutions is a full-service technology and creative agency. We help businesses grow through innovative digital solutions, creative design, and reliable IT services.</p>
         <div class="social-links">

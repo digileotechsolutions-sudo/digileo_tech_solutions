@@ -37,7 +37,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
   <!-- Preload critical assets -->
-  <link rel="preload" as="image" href="<?= $basePath ?>images/DIGILEO%20LOGO.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="<?= $basePath ?>images/DIGILEO%20LOGO.webp?v=2" type="image/webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="preload" as="style" href="<?= $basePath ?>css/styles.css">
 
@@ -78,7 +78,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
 <header class="header">
   <div class="container header-inner">
     <a href="<?= $basePath ?>index.php" class="logo">
-      <img src="<?= $basePath ?>images/DIGILEO%20LOGO.webp" alt="Digileo Tech Solutions" width="64" height="64" fetchpriority="high" decoding="async">
+      <img src="<?= $basePath ?>images/DIGILEO%20LOGO.webp?v=2" alt="Digileo Tech Solutions" width="1920" height="625" loading="eager" fetchpriority="high" decoding="async">
     </a>
     <button class="hamburger" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
