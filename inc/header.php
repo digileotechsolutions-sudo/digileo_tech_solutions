@@ -57,7 +57,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="<?= $basePath ?>css/styles.css?v=2.1">
+  <link rel="stylesheet" href="<?= $basePath ?>css/styles.css?v=2.2">
 <?php if (in_array($currentPage, $servicePages)): ?>
   <link rel="stylesheet" href="<?= $basePath ?>css/<?= $currentPage ?>.css?v=1.0" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="<?= $basePath ?>css/<?= $currentPage ?>.css?v=1.0"></noscript>
@@ -77,7 +77,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
 <header class="header">
   <div class="container header-inner">
     <a href="<?= $basePath ?>index.php" class="logo">
-      <img src="<?= $basePath ?>images/DIGILEO%20LOGO.png" alt="Digileo Tech Solutions" width="64" height="64" fetchpriority="high">
+      <img src="<?= $basePath ?>images/DIGILEO%20LOGO.webp" alt="Digileo Tech Solutions" width="64" height="64" fetchpriority="high" decoding="async">
     </a>
     <button class="hamburger" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
@@ -85,9 +85,9 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
     <div class="nav-center">
       <nav class="nav" aria-label="Main navigation">
         <button class="nav-close" aria-label="Close menu">&times;</button>
-        <a href="<?= $basePath ?>about.php" class="<?= $currentPage === 'about' ? 'active' : '' ?>">About</a>
+        <a href="<?= $basePath ?>about.php" class="<?= $currentPage === 'about' ? 'active' : '' ?>"><i class="fas fa-circle-info" aria-hidden="true"></i> About</a>
         <div class="nav-dropdown">
-          <a href="#" class="dropdown-trigger <?= in_array($currentPage, $servicePages) ? 'active' : '' ?>">Services <i class="fas fa-chevron-down"></i></a>
+          <a href="#" class="dropdown-trigger <?= in_array($currentPage, $servicePages) ? 'active' : '' ?>"><i class="fas fa-layer-group" aria-hidden="true"></i> Services <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
           <div class="dropdown-menu">
             <a href="<?= $servicePrefix ?>graphic-design.php" class="<?= $currentPage === 'graphic-design' ? 'active' : '' ?>">Graphic Design</a>
             <a href="<?= $servicePrefix ?>web-design.php" class="<?= $currentPage === 'web-design' ? 'active' : '' ?>">Web Design</a>
@@ -97,11 +97,11 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
             <a href="<?= $servicePrefix ?>consultancy.php" class="<?= $currentPage === 'consultancy' ? 'active' : '' ?>">Consultancy</a>
           </div>
         </div>
-        <a href="<?= $basePath ?>portfolio.php" class="<?= $currentPage === 'portfolio' ? 'active' : '' ?>">Portfolio</a>
-        <a href="<?= $basePath ?>blog.php" class="<?= $currentPage === 'blog' ? 'active' : '' ?>">Blog</a>
-        <a href="<?= $basePath ?>contact.php" class="<?= $currentPage === 'contact' ? 'active' : '' ?>">Contact</a>
+        <a href="<?= $basePath ?>portfolio.php" class="<?= $currentPage === 'portfolio' ? 'active' : '' ?>"><i class="fas fa-images" aria-hidden="true"></i> Portfolio</a>
+        <a href="<?= $basePath ?>blog.php" class="<?= $currentPage === 'blog' ? 'active' : '' ?>"><i class="fas fa-newspaper" aria-hidden="true"></i> Blog</a>
+        <a href="<?= $basePath ?>contact.php" class="<?= $currentPage === 'contact' ? 'active' : '' ?>"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
       </nav>
     </div>
-    <a href="<?= $basePath ?>quote.php" class="btn btn-primary btn-sm nav-cta">Get a Quote</a>
+    <a href="<?= $basePath ?>quote.php" class="btn btn-primary btn-sm nav-cta">Get a Quote <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
   </div>
 </header>
