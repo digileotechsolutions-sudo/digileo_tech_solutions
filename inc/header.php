@@ -43,6 +43,18 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
 
   <!-- Critical inline CSS for above-the-fold content -->
   <style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:16px}body{font-family:system-ui,-apple-system,sans-serif;color:#4B5563;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background:#F5F5F5}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}</style>
+  <style>
+    .page-loader{position:fixed;inset:0;z-index:10000;display:grid;place-content:center;justify-items:center;gap:22px;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#f5f6fa;opacity:1;visibility:visible;transition:opacity .45s ease,visibility .45s ease}
+    .page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .page-loader img{display:block;width:min(68vw,320px);max-height:105px;height:auto;object-fit:contain;animation:loader-logo-pulse 1.8s ease-in-out infinite}
+    .page-loader-dots{display:flex;align-items:center;gap:8px;height:12px}
+    .page-loader-dots span{width:7px;height:7px;border-radius:50%;background:#008000;animation:loader-dot-pulse 1.1s ease-in-out infinite}
+    .page-loader-dots span:nth-child(2){animation-delay:.16s}
+    .page-loader-dots span:nth-child(3){animation-delay:.32s}
+    @keyframes loader-logo-pulse{0%,100%{opacity:.78;transform:scale(.98)}50%{opacity:1;transform:scale(1)}}
+    @keyframes loader-dot-pulse{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+    @media(prefers-reduced-motion:reduce){.page-loader,.page-loader img,.page-loader-dots span{animation:none;transition:none}.page-loader img{opacity:1;transform:none}.page-loader-dots span{opacity:.75}}
+  </style>
 
   <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
@@ -74,6 +86,33 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+
+<div class="page-loader" aria-hidden="true">
+  <img src="<?= $basePath ?>images/DIGILEO%20LOGO.webp?v=2" alt="" width="1920" height="625" loading="eager" fetchpriority="high" decoding="async">
+  <div class="page-loader-dots"><span></span><span></span><span></span></div>
+</div>
+<script>
+  (() => {
+    const loader = document.querySelector('.page-loader');
+    if (!loader) return;
+    let dismissed = false;
+    let fallback;
+    const dismiss = () => {
+      if (dismissed) return;
+      dismissed = true;
+      clearTimeout(fallback);
+      loader.classList.add('is-hidden');
+      setTimeout(() => loader.remove(), 500);
+    };
+    if (document.readyState === 'complete') {
+      dismiss();
+    } else {
+      window.addEventListener('load', dismiss, { once: true });
+      window.addEventListener('error', dismiss, { once: true, capture: true });
+      fallback = setTimeout(dismiss, 8000);
+    }
+  })();
+</script>
 
 <header class="header">
   <div class="container header-inner">
