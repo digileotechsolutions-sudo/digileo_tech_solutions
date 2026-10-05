@@ -52,6 +52,49 @@ domReady(() => {
   });
 });
 
+// Blog search and topic filters
+domReady(() => {
+  const search = document.querySelector('[data-blog-search]');
+  const filters = document.querySelectorAll('[data-blog-filter]');
+  const cards = document.querySelectorAll('[data-blog-card]');
+  const emptyState = document.querySelector('[data-blog-empty]');
+  const resultsCount = document.querySelector('[data-blog-results]');
+
+  if (!search || !filters.length || !cards.length) return;
+
+  let activeCategory = 'all';
+  const updateResults = () => {
+    const query = search.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const matchesCategory = activeCategory === 'all' || card.dataset.category === activeCategory;
+      const matchesSearch = !query || card.dataset.title.includes(query);
+      const isVisible = matchesCategory && matchesSearch;
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount++;
+    });
+
+    if (emptyState) emptyState.hidden = visibleCount > 0;
+    if (resultsCount) {
+      resultsCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'article' : 'articles'}`;
+    }
+  };
+
+  search.addEventListener('input', updateResults);
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      activeCategory = filter.dataset.blogFilter;
+      filters.forEach(button => {
+        const isActive = button === filter;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+      updateResults();
+    });
+  });
+});
+
 // Sticky Header (passive scroll)
 const header = document.querySelector('.header');
 let ticking = false;

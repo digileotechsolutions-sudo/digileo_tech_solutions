@@ -57,10 +57,13 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="<?= $basePath ?>css/styles.css?v=2.2">
+  <link rel="stylesheet" href="<?= $basePath ?>css/styles.css?v=2.3">
 <?php if (in_array($currentPage, $servicePages)): ?>
   <link rel="stylesheet" href="<?= $basePath ?>css/<?= $currentPage ?>.css?v=1.0" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="<?= $basePath ?>css/<?= $currentPage ?>.css?v=1.0"></noscript>
+<?php endif; ?>
+<?php if ($currentPage === 'blog'): ?>
+  <link rel="stylesheet" href="<?= $basePath ?>css/blog.css?v=1.0">
 <?php endif; ?>
   <link rel="stylesheet" href="<?= $basePath ?>whatsapp-chat/widget/widget.css?v=1.0" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="<?= $basePath ?>whatsapp-chat/widget/widget.css?v=1.0"></noscript>
