@@ -76,7 +76,5 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <!-- Main Script (deferred) -->
 <script src="<?= $basePath ?>js/script.js?v=2.3" defer></script>
-<!-- WhatsApp Widget (deferred) -->
-<script src="<?= $basePath ?>whatsapp-chat/widget/widget.js" defer></script>
 </body>
 </html>
