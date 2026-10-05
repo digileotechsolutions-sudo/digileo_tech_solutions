@@ -35,15 +35,13 @@ function processHtmlOutput($html)
 
 /**
  * Transform <img> tags to add WebP <picture> wrapper and lazy loading.
- * Skips images with: loading="eager", class="skip-optimize", inline SVGs
+ * Preserves eager loading and skips images marked skip-optimize and inline SVGs.
  */
 function optimizeImagesInHtml($html)
 {
     $callback = function ($match) {
         $imgTag = $match[0];
-        if (preg_match('/loading\s*=\s*["\']eager["\']/', $imgTag)) {
-            return $imgTag;
-        }
+        $isEager = preg_match('/loading\s*=\s*["\']eager["\']/', $imgTag);
         if (preg_match('/class\s*=\s*["\'][^"\']*skip-optimize[^"\']*["\']/', $imgTag)) {
             return $imgTag;
         }
@@ -54,13 +52,51 @@ function optimizeImagesInHtml($html)
         if (preg_match('/\.(svg|gif)(\?.*)?$/i', $src)) {
             return $imgTag;
         }
-        if (!preg_match('/loading\s*=\s*["\']lazy["\']/', $imgTag)) {
+        if (!$isEager && !preg_match('/loading\s*=\s*["\']lazy["\']/', $imgTag)) {
             $imgTag = preg_replace('/<img\s/', '<img loading="lazy" decoding="async" ', $imgTag, 1);
         }
         $webpSrc = preg_replace('/\.(jpg|jpeg|png)(\?.*)?$/i', '.webp', $src);
-        $webpPath = ltrim(parse_url($webpSrc, PHP_URL_PATH), '/');
-        $webpExists = $webpSrc !== $src && file_exists($webpPath);
-        if (!$webpExists) {
+        $srcPath = parse_url($src, PHP_URL_PATH);
+        $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+        if (
+            $webpSrc === $src ||
+            !$srcPath ||
+            strpos($srcPath, '//') === 0 ||
+            parse_url($src, PHP_URL_SCHEME) !== null ||
+            parse_url($src, PHP_URL_HOST) !== null ||
+            !$documentRoot
+        ) {
+            return $imgTag;
+        }
+        $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        $urlPath = $srcPath[0] === '/' ? $srcPath : rtrim($scriptDir, '/') . '/' . $srcPath;
+        $segments = [];
+        foreach (explode('/', rawurldecode($urlPath)) as $segment) {
+            if ($segment === '' || $segment === '.') {
+                continue;
+            }
+            if ($segment === '..') {
+                array_pop($segments);
+                continue;
+            }
+            $segments[] = $segment;
+        }
+        $relativePath = implode(DIRECTORY_SEPARATOR, $segments);
+        $relativeWebpPath = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $relativePath);
+        $webpPath = realpath($documentRoot . DIRECTORY_SEPARATOR . $relativeWebpPath);
+        $extensionWebpPath = realpath($documentRoot . DIRECTORY_SEPARATOR . $relativePath . '.webp');
+        $documentRootPrefix = rtrim($documentRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (
+            $extensionWebpPath &&
+            strpos($extensionWebpPath, $documentRootPrefix) === 0
+        ) {
+            $webpPath = $extensionWebpPath;
+            $webpSrc = preg_replace('/(\.(jpg|jpeg|png))(?=[?#]|$)/i', '$1.webp', $src);
+        }
+        if (
+            !$webpPath ||
+            strpos($webpPath, $documentRootPrefix) !== 0
+        ) {
             return $imgTag;
         }
         $alt = '';

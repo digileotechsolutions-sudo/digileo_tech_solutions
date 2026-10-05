@@ -37,7 +37,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
   <!-- Preload critical assets -->
-  <link rel="preload" as="image" href="<?= $basePath ?>images/DIGILEO%20LOGO.png" fetchpriority="high">
+  <link rel="preload" as="image" href="<?= $basePath ?>images/DIGILEO%20LOGO.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="preload" as="style" href="<?= $basePath ?>css/styles.css">
 
