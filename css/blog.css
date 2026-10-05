@@ -122,6 +122,11 @@
 .blog-filters {
   display: grid;
   gap: 4px;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-color: #c8ced8 transparent;
+  scrollbar-width: thin;
 }
 
 .blog-filter {
@@ -328,6 +333,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 
   .blog-filter-heading {

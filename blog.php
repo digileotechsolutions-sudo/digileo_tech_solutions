@@ -11,6 +11,7 @@ $articles = [
     'author' => 'John Doe',
     'title' => 'The Future of Web Development: Trends to Watch in 2025',
     'summary' => 'Explore the latest trends shaping web development, from AI-powered interfaces to progressive web apps and beyond.',
+    'tags' => ['software development', 'business technology', 'web development'],
     'video' => 'https://www.youtube.com/watch?v=oS0yjg-kyRY',
   ],
   [
@@ -20,6 +21,7 @@ $articles = [
     'author' => 'Jane Smith',
     'title' => '10 Graphic Design Trends That Will Dominate 2025',
     'summary' => 'From minimalist branding to bold typography, discover the design trends that are defining modern brand identities.',
+    'tags' => ['web design', 'business website'],
     'video' => 'https://www.youtube.com/watch?v=NkQlmPCQfgY',
   ],
   [
@@ -29,6 +31,7 @@ $articles = [
     'author' => 'Mike Johnson',
     'title' => 'How Digital Transformation Drives Business Growth',
     'summary' => 'Learn how businesses are leveraging technology to streamline operations, reduce costs, and accelerate growth.',
+    'tags' => ['choosing a vendor', 'business technology', 'IT partner'],
     'video' => 'https://www.youtube.com/watch?v=bbdP6FKO1ZI',
   ],
   [
@@ -38,10 +41,43 @@ $articles = [
     'author' => 'Sarah Williams',
     'title' => 'Building a Successful E-Commerce Website: A Complete Guide',
     'summary' => 'A step-by-step guide to creating an online store that converts visitors into loyal customers.',
+    'tags' => ['M-Pesa integration', 'online payments', 'invoicing', 'cash flow'],
     'video' => 'https://www.youtube.com/watch?v=QeSQqC1sSeY',
   ],
 ];
-$categories = array_count_values(array_column($articles, 'category'));
+$blogTags = [
+  'software development',
+  'choosing a vendor',
+  'business technology',
+  'IT partner',
+  'M-Pesa integration',
+  'online payments',
+  'invoicing',
+  'cash flow',
+  'web hosting',
+  'domain names',
+  'SSL certificate',
+  'website infrastructure',
+  'web design',
+  'web development',
+  'SEO',
+  'business website',
+  'Reatech360',
+  'ERP software',
+  'business management platform',
+  'voice assistant',
+  'ISP billing',
+  'WiFi hotspot',
+  'MikroTik',
+  'PPPoE',
+  'call centre software',
+  'IVR',
+  'customer support',
+  'business phone system',
+  'HR software',
+  'payroll',
+  'employee management',
+];
 ?>
 
 <main class="blog-page">
@@ -66,11 +102,11 @@ $categories = array_count_values(array_column($articles, 'category'));
         <nav class="blog-filters" aria-label="Filter articles by topic">
           <span class="blog-filter-heading">Filter by topic</span>
           <button class="blog-filter active" type="button" data-blog-filter="all" aria-pressed="true">
-            <span>All posts</span><span><?= count($articles) ?></span>
+            <span>All posts</span>
           </button>
-<?php foreach ($categories as $category => $count): ?>
-          <button class="blog-filter" type="button" data-blog-filter="<?= htmlspecialchars(strtolower($category), ENT_QUOTES, 'UTF-8') ?>" aria-pressed="false">
-            <span><?= htmlspecialchars($category) ?></span><span><?= $count ?></span>
+<?php foreach ($blogTags as $tag): ?>
+          <button class="blog-filter" type="button" data-blog-filter="<?= htmlspecialchars(strtolower($tag), ENT_QUOTES, 'UTF-8') ?>" aria-pressed="false">
+            <span><?= htmlspecialchars($tag) ?></span>
           </button>
 <?php endforeach; ?>
         </nav>
@@ -80,10 +116,11 @@ $categories = array_count_values(array_column($articles, 'category'));
         <p class="blog-results-count" data-blog-results aria-live="polite"><?= count($articles) ?> articles</p>
         <div class="blog-posts">
 <?php foreach ($articles as $article):
-  $categoryKey = strtolower($article['category']);
+  $articleTags = array_map('strtolower', $article['tags']);
+  $searchText = strtolower($article['title'] . ' ' . $article['summary'] . ' ' . $article['category'] . ' ' . implode(' ', $article['tags']));
   $imageUrl = 'https://images.unsplash.com/' . $article['image'] . '?auto=format&fit=crop&w=900&q=75';
 ?>
-          <article class="blog-card" data-blog-card data-category="<?= htmlspecialchars($categoryKey, ENT_QUOTES, 'UTF-8') ?>" data-title="<?= htmlspecialchars(strtolower($article['title'] . ' ' . $article['summary'] . ' ' . $article['category']), ENT_QUOTES, 'UTF-8') ?>">
+          <article class="blog-card" data-blog-card data-tags="<?= htmlspecialchars(implode('|', $articleTags), ENT_QUOTES, 'UTF-8') ?>" data-title="<?= htmlspecialchars($searchText, ENT_QUOTES, 'UTF-8') ?>">
             <a class="blog-card-image" href="<?= htmlspecialchars($article['video'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" aria-label="Watch: <?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>">
               <img src="<?= htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" width="900" height="500" loading="lazy" decoding="async">
             </a>

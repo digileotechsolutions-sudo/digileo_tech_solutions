@@ -62,15 +62,33 @@ domReady(() => {
 
   if (!search || !filters.length || !cards.length) return;
 
-  let activeCategory = 'all';
+  const allFilter = document.querySelector('[data-blog-filter="all"]');
+  const normalizeTag = value => (value || '').trim().toLowerCase();
+  const setActiveFilter = tag => {
+    const normalizedTag = normalizeTag(tag);
+    const selectedFilter = Array.from(filters).find(filter =>
+      normalizeTag(filter.dataset.blogFilter) === normalizedTag
+    ) || allFilter;
+
+    filters.forEach(filter => {
+      const isActive = filter === selectedFilter;
+      filter.classList.toggle('active', isActive);
+      filter.setAttribute('aria-pressed', String(isActive));
+    });
+
+    return selectedFilter?.dataset.blogFilter || 'all';
+  };
+  let activeTag = setActiveFilter(new URLSearchParams(window.location.search).get('tag'));
+
   const updateResults = () => {
     const query = search.value.trim().toLowerCase();
     let visibleCount = 0;
 
     cards.forEach(card => {
-      const matchesCategory = activeCategory === 'all' || card.dataset.category === activeCategory;
+      const cardTags = (card.dataset.tags || '').split('|');
+      const matchesTag = activeTag === 'all' || cardTags.includes(activeTag);
       const matchesSearch = !query || card.dataset.title.includes(query);
-      const isVisible = matchesCategory && matchesSearch;
+      const isVisible = matchesTag && matchesSearch;
       card.hidden = !isVisible;
       if (isVisible) visibleCount++;
     });
@@ -84,15 +102,23 @@ domReady(() => {
   search.addEventListener('input', updateResults);
   filters.forEach(filter => {
     filter.addEventListener('click', () => {
-      activeCategory = filter.dataset.blogFilter;
-      filters.forEach(button => {
-        const isActive = button === filter;
-        button.classList.toggle('active', isActive);
-        button.setAttribute('aria-pressed', String(isActive));
-      });
+      activeTag = setActiveFilter(filter.dataset.blogFilter);
+      const url = new URL(window.location.href);
+      if (activeTag === 'all') {
+        url.searchParams.delete('tag');
+      } else {
+        url.searchParams.set('tag', filter.querySelector('span').textContent.trim());
+      }
+      window.history.pushState({}, '', url);
       updateResults();
     });
   });
+
+  window.addEventListener('popstate', () => {
+    activeTag = setActiveFilter(new URLSearchParams(window.location.search).get('tag'));
+    updateResults();
+  });
+  updateResults();
 });
 
 // Sticky Header (passive scroll)
