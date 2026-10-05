@@ -9,7 +9,8 @@
 .gd-gallery-track { display: flex; gap: 20px; width: max-content; animation: pfGalleryScroll 60s linear infinite; padding: 16px 0; }
 .gd-gallery-wrapper:hover .gd-gallery-track { animation-play-state: paused; }
 
-.gd-gallery-item { flex: 0 0 300px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border-color); position: relative; cursor: pointer; background: var(--card-bg); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.gd-gallery-item { flex: 0 0 300px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border-color); position: relative; cursor: pointer; background: var(--card-bg); color: inherit; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.gd-gallery-item:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 .gd-gallery-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
 .gd-gallery-item .gd-card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s ease; display: block; }
 .gd-gallery-item:hover .gd-card-img { transform: scale(1.08); }

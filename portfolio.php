@@ -16,22 +16,6 @@
       <p>Explore our work across web, software, hardware, and print.</p>
     </div>
 
-    <div class="gd-portfolio-section">
-      <div class="gd-portfolio-header"><i class="fas fa-dumbbell" aria-hidden="true"></i> Featured Website</div>
-      <div class="projects-grid portfolio-featured-grid">
-        <a class="project-card-link" href="https://mackfastfitnesssolution.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit MackFast Fitness Solution website">
-          <div class="project-card fade-in">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
-            <span class="project-tag">Web Development</span>
-            <div class="project-overlay">
-              <h4>MackFast Fitness Solution</h4>
-              <p>Fitness Website · Visit Live Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-
 <?php
 $pfCats = [
   'graphic-design'    => ['folder' => 'Graphic Design',      'icon' => 'fa-paint-brush', 'label' => 'Graphic Design',      'id' => 'pf-graphic-design',    'tags' => ['Logo Design', 'Brand Identity', 'Graphic']],
@@ -43,7 +27,7 @@ $pfCats = [
 
 foreach ($pfCats as $dir => $cat):
   $files = glob("images/our portfolio/{$cat['folder']}/*.{png,jpg,jpeg}", GLOB_BRACE);
-  if (empty($files)) continue;
+  if (empty($files) && $dir !== 'web-dev') continue;
 ?>
     <div class="gd-portfolio-section" id="<?= $cat['id'] ?>">
       <div class="gd-portfolio-header"><i class="fas <?= $cat['icon'] ?>"></i> <?= $cat['label'] ?> <a href="#<?= $cat['id'] ?>" class="gd-view-all">View All <i class="fas fa-arrow-right"></i></a></div>
@@ -63,6 +47,14 @@ foreach ($pfCats as $dir => $cat):
             <div class="gd-gallery-overlay"><h4><?= htmlspecialchars($name) ?></h4><span><?= $cat['label'] ?></span></div>
           </div>
 <?php $i++; endforeach; ?>
+<?php if ($dir === 'web-dev'): ?>
+          <a class="gd-gallery-item fade-in" href="https://mackfastfitnesssolution.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit MackFast Fitness Solution website">
+            <span class="gd-gallery-tag">Fitness Website</span>
+            <img class="gd-card-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
+            <div class="gd-card-info"><h4>MackFast Fitness Solution</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
+            <div class="gd-gallery-overlay"><h4>MackFast Fitness Solution</h4><span>Web Development · Visit Live Website</span></div>
+          </a>
+<?php endif; ?>
           <!-- dup -->
 <?php
   $i = 0;
@@ -78,6 +70,14 @@ foreach ($pfCats as $dir => $cat):
             <div class="gd-gallery-overlay"><h4><?= htmlspecialchars($name) ?></h4><span><?= $cat['label'] ?></span></div>
           </div>
 <?php $i++; endforeach; ?>
+<?php if ($dir === 'web-dev'): ?>
+          <a class="gd-gallery-item fade-in" href="https://mackfastfitnesssolution.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit MackFast Fitness Solution website">
+            <span class="gd-gallery-tag">Fitness Website</span>
+            <img class="gd-card-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
+            <div class="gd-card-info"><h4>MackFast Fitness Solution</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
+            <div class="gd-gallery-overlay"><h4>MackFast Fitness Solution</h4><span>Web Development · Visit Live Website</span></div>
+          </a>
+<?php endif; ?>
         </div>
       </div>
     </div>
