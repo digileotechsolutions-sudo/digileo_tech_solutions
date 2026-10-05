@@ -24,6 +24,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <meta name="description" content="Digileo Tech Solutions - Graphic Design, Web Design, Web Development, Software & Hardware Solutions, Printing Services, and IT Consultancy.">
   <meta name="keywords" content="web design, graphic design, web development, printing services, IT consultancy, software solutions, hardware solutions">
   <meta name="author" content="Digileo Tech Solutions">
+  <meta name="google-site-verification" content="SplvbHJ9vxAYnBe0_6KgymwHz7xnsOsv7M0JdYMrMYk">
   <meta name="csrf-token" content="<?= csrfToken() ?>">
   <title><?= htmlspecialchars($pageTitle) ?> | Digileo Tech Solutions</title>
 
