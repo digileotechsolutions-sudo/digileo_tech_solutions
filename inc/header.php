@@ -46,11 +46,11 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <style>
     .page-loader{position:fixed;inset:0;z-index:10000;display:grid;place-content:center;justify-items:center;gap:22px;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#f5f6fa;opacity:1;visibility:visible;transition:opacity .45s ease,visibility .45s ease}
     .page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
-    .page-loader img{display:block;width:min(68vw,320px);max-height:105px;height:auto;object-fit:contain;animation:loader-logo-pulse 1.8s ease-in-out infinite}
+    .page-loader img{display:block;width:min(68vw,320px);max-height:105px;height:auto;object-fit:contain;animation:loader-logo-pulse 2.8s ease-in-out infinite}
     .page-loader-dots{display:flex;align-items:center;gap:8px;height:12px}
-    .page-loader-dots span{width:7px;height:7px;border-radius:50%;background:#008000;animation:loader-dot-pulse 1.1s ease-in-out infinite}
-    .page-loader-dots span:nth-child(2){animation-delay:.16s}
-    .page-loader-dots span:nth-child(3){animation-delay:.32s}
+    .page-loader-dots span{width:7px;height:7px;border-radius:50%;background:#008000;animation:loader-dot-pulse 1.7s ease-in-out infinite}
+    .page-loader-dots span:nth-child(2){animation-delay:.24s}
+    .page-loader-dots span:nth-child(3){animation-delay:.48s}
     @keyframes loader-logo-pulse{0%,100%{opacity:.78;transform:scale(.98)}50%{opacity:1;transform:scale(1)}}
     @keyframes loader-dot-pulse{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
     @media(prefers-reduced-motion:reduce){.page-loader,.page-loader img,.page-loader-dots span{animation:none;transition:none}.page-loader img{opacity:1;transform:none}.page-loader-dots span{opacity:.75}}
