@@ -285,6 +285,51 @@
   font-size: 0.65rem;
 }
 
+.blog-article-details {
+  width: 100%;
+  margin-top: 15px;
+  border-top: 1px solid #edf0f4;
+}
+
+.blog-article-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 13px;
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 700;
+  list-style: none;
+}
+
+.blog-article-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog-article-details summary i {
+  font-size: 0.68rem;
+  transition: transform 0.2s ease;
+}
+
+.blog-article-details[open] summary i {
+  transform: rotate(90deg);
+}
+
+.blog-article-body {
+  padding-top: 12px;
+  color: #586474;
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+
+.blog-article-body br + br {
+  display: block;
+  margin-top: 0.65em;
+  content: "";
+}
+
 .blog-empty {
   padding: 32px 20px;
   color: #687384;
