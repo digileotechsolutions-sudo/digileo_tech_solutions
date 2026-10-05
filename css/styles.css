@@ -58,11 +58,9 @@ img { max-width: 100%; height: auto; display: block; }
 .btn-sm { padding: 10px 22px; font-size: 0.85rem; }
 .btn-lg { padding: 16px 40px; font-size: 1.05rem; }
 
-.header { position: fixed; top: 12px; left: 50%; right: auto; transform: translateX(-50%); width: calc(100% - 32px); max-width: 1360px; z-index: 1000; background: rgba(255,255,255,0.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 8px 32px rgba(18,28,45,0.09); transition: height 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, top 0.3s ease; height: 76px; border: 1px solid rgba(226,230,237,0.9); border-radius: 999px; }
-.header.scrolled { top: 8px; height: 68px; box-shadow: 0 10px 36px rgba(18,28,45,0.13); background: rgba(255,255,255,0.97); }
+.header { position: fixed; top: 12px; left: 50%; right: auto; transform: translateX(-50%); width: calc(100% - 32px); max-width: 1360px; z-index: 1000; background: rgba(255,255,255,0.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 8px 32px rgba(18,28,45,0.09); height: 76px; border: 1px solid rgba(226,230,237,0.9); border-radius: 999px; }
 .header .container { max-width: none; padding: 0 12px 0 22px; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 74px; position: relative; transition: height 0.3s ease; }
-.header.scrolled .header-inner { height: 66px; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 74px; position: relative; }
 .logo { display: flex; align-items: center; flex-shrink: 0; }
 .logo img { height: 50px; width: auto; display: block; }
 .nav-center { display: flex; flex: 1; justify-content: center; min-width: 0; }
@@ -412,7 +410,6 @@ select.form-control option { background: #ffffff; color: var(--white); }
   .nav-center { position: static; transform: none; flex: 0; }
   .nav-cta { display: none; }
   .header { top: 8px; width: calc(100% - 20px); }
-  .header.scrolled { top: 6px; }
   .header .container { padding: 0 10px 0 16px; }
   .header-inner { gap: 10px; }
   .hamburger { flex-shrink: 0; width: 42px; height: 42px; gap: 5px; border-radius: 50%; background: #f1f3f6; }
@@ -463,9 +460,7 @@ select.form-control option { background: #ffffff; color: var(--white); }
 
 @media (max-width: 480px) {
   .header { height: 64px; }
-  .header.scrolled { height: 60px; }
   .header-inner { height: 62px; }
-  .header.scrolled .header-inner { height: 58px; }
   .header .logo img { height: 40px; }
   .stats-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }

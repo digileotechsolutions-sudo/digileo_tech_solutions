@@ -121,19 +121,6 @@ domReady(() => {
   updateResults();
 });
 
-// Sticky Header (passive scroll)
-const header = document.querySelector('.header');
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      header?.classList.toggle('scrolled', window.scrollY > 50);
-      ticking = false;
-    });
-    ticking = true;
-  }
-}, { passive: true });
-
 // Back to Top
 const backToTop = document.querySelector('.back-to-top');
 window.addEventListener('scroll', () => {
