@@ -1,0 +1,115 @@
+:root {
+  --dev-bg: #ffffff;
+  --dev-surface: #f8f9fa;
+  --dev-card: #ffffff;
+  --dev-border: #e5e7eb;
+  --dev-green: #008000;
+  --dev-pink: #008000;
+  --dev-purple: #008000;
+  --dev-cyan: #222222;
+  --dev-orange: #D32F2F;
+  --dev-yellow: #f1fa8c;
+  --dev-comment: #6B7280;
+  --dev-code-green: #008000;
+  --dev-code-red: #D32F2F;
+}
+
+.wdv-banner { position: relative; overflow: hidden; background: #F0FFF0; padding: calc(var(--header-height) + 60px) 0 70px; }
+.wdv-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,128,0,0.05) 0%, rgba(0,128,0,0.03) 100%); }
+.wdv-banner h1 { font-size: 2.8rem; font-weight: 900; color: var(--dev-green); margin-bottom: 12px; font-family: 'Courier New', monospace; }
+.wdv-banner h1::before { content: '> '; color: var(--dev-green); }
+.wdv-banner p { color: var(--dev-comment); max-width: 600px; margin: 0 auto; font-size: 1.1rem; font-family: 'Courier New', monospace; }
+.wdv-banner p::after { content: ' _'; animation: blink 1s step-end infinite; color: var(--dev-green); }
+@keyframes blink { 50% { opacity: 0; } }
+.wdv-banner .breadcrumb a, .wdv-banner .breadcrumb span { color: var(--dev-comment); }
+.wdv-banner .breadcrumb span { color: var(--dev-green); }
+
+.wdv-section { background: #ffffff; }
+.wdv-section-alt { background: var(--dev-surface); }
+.wdv-section-title h2 { font-size: 2rem; font-weight: 800; margin-bottom: 10px; color: var(--dev-pink); }
+.wdv-section-title h2 span { color: var(--dev-green); }
+.wdv-section-title p { color: var(--dev-comment); max-width: 550px; }
+
+.wdv-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.wdv-service-card { background: var(--dev-card); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--dev-border); transition: var(--transition); }
+.wdv-service-card:hover { transform: translateY(-4px); border-color: #D32F2F; box-shadow: 0 8px 30px rgba(211,47,47,0.08); }
+.wdv-service-card .wdv-icon { width: 48px; height: 48px; border-radius: 10px; background: rgba(0,128,0,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dev-green); margin-bottom: 14px; }
+.wdv-service-card:hover .wdv-icon { background: #D32F2F; color: #ffffff; }
+.wdv-service-card h3 { font-size: 1rem; font-weight: 700; color: var(--dev-pink); margin-bottom: 6px; }
+.wdv-service-card p { font-size: 0.85rem; color: var(--dev-comment); line-height: 1.7; }
+
+.wdv-code-block { background: var(--dev-card); border-radius: var(--radius); padding: 24px; border: 1px solid var(--dev-border); font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.8; overflow-x: auto; }
+.wdv-code-block .keyword { color: var(--dev-green); }
+.wdv-code-block .function { color: var(--dev-code-green); }
+.wdv-code-block .string { color: var(--dev-yellow); }
+.wdv-code-block .comment { color: var(--dev-comment); font-style: italic; }
+.wdv-code-block .variable { color: var(--dev-code-green); }
+.wdv-code-block .number { color: var(--dev-code-red); }
+
+.wdv-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.wdv-stat { background: var(--dev-card); border-radius: var(--radius); padding: 24px 16px; text-align: center; border: 1px solid var(--dev-border); }
+.wdv-stat .num { font-size: 2rem; font-weight: 900; color: var(--dev-green); }
+.wdv-stat .label { font-size: 0.8rem; color: var(--dev-comment); margin-top: 4px; }
+
+.wdv-process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.wdv-process-step { background: var(--dev-card); border-radius: var(--radius); padding: 24px 20px; text-align: center; border: 1px solid var(--dev-border); position: relative; overflow: hidden; }
+.wdv-process-step::before { content: attr(data-step); position: absolute; top: -10px; right: 10px; font-size: 4rem; font-weight: 900; color: rgba(0,128,0,0.04); line-height: 1; font-family: 'Courier New', monospace; }
+.wdv-process-step .wdv-step-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,128,0,0.08); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.1rem; color: var(--dev-green); }
+.wdv-process-step:hover .wdv-step-icon { background: #D32F2F; color: #ffffff; }
+.wdv-process-step h4 { font-size: 1rem; font-weight: 700; color: var(--dev-cyan); margin-bottom: 6px; }
+.wdv-process-step p { font-size: 0.82rem; color: var(--dev-comment); line-height: 1.6; }
+
+.wdv-tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.wdv-tools span { padding: 8px 18px; background: var(--dev-card); border: 1px solid var(--dev-border); border-radius: 6px; font-size: 0.82rem; color: var(--dev-comment); font-family: 'Courier New', monospace; transition: var(--transition); }
+.wdv-tools span:hover { border-color: #D32F2F; color: #D32F2F; }
+
+.wdv-pricing-card { background: var(--dev-card); border-radius: var(--radius); padding: 30px 24px; text-align: center; border: 1px solid var(--dev-border); transition: var(--transition); }
+.wdv-pricing-card:hover { transform: translateY(-6px); border-color: #D32F2F; }
+.wdv-pricing-card.featured { border-color: var(--dev-green); transform: scale(1.05); }
+.wdv-pricing-card.featured:hover { transform: scale(1.05) translateY(-6px); }
+.wdv-pricing-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dev-pink); margin-bottom: 12px; }
+.wdv-pricing-card .wdv-price { font-size: 2.4rem; font-weight: 900; color: var(--dev-green); }
+.wdv-pricing-card .wdv-duration { font-size: 0.82rem; color: var(--dev-comment); margin-bottom: 20px; }
+.wdv-pricing-card .wdv-price-badge { display: inline-block; padding: 2px 14px; background: var(--dev-green); color: #ffffff; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-bottom: 12px; font-family: 'Courier New', monospace; }
+.wdv-pricing-card ul { text-align: left; margin-bottom: 24px; }
+.wdv-pricing-card ul li { padding: 7px 0; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: rgba(0,0,0,0.6); }
+.wdv-pricing-card ul li i.fa-check { color: var(--dev-orange); }
+.wdv-pricing-card ul li i.fa-times { color: var(--dev-comment); }
+.wdv-pricing-card .btn { width: 100%; justify-content: center; }
+
+.wdv-portfolio { text-align: center; padding: 16px 0; font-size: 0; }
+.wdv-port-item { display: inline-block; width: 520px; margin: 0 12px 24px; vertical-align: top; position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--dev-border); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; }
+.wdv-port-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.wdv-port-item img { width: 100%; height: 400px; object-fit: cover; transition: transform 0.5s ease; display: block; }
+.wdv-port-item:hover img { transform: scale(1.08); }
+.wdv-port-overlay { position: absolute; top: 0; left: 0; right: 0; height: 400px; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: opacity 0.4s ease; }
+.wdv-port-item:hover .wdv-port-overlay { opacity: 1; }
+.wdv-port-overlay h4 { color: #ffffff; font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.wdv-port-overlay span { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+
+.wdv-cta { background: linear-gradient(135deg, var(--dev-green) 0%, #006600 100%); padding: 70px 0; text-align: center; }
+.wdv-cta h2 { font-size: 2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; }
+.wdv-cta p { color: rgba(255,255,255,0.85); max-width: 550px; margin: 0 auto 28px; }
+.wdv-cta .btn-secondary { background: var(--dev-green); }
+.wdv-cta .btn-secondary:hover { background: #D32F2F; }
+
+@media (max-width: 1024px) {
+  .wdv-services-grid { grid-template-columns: repeat(2, 1fr); }
+  .wdv-stats { grid-template-columns: repeat(2, 1fr); }
+  .wdv-process { grid-template-columns: repeat(2, 1fr); }
+  .wdv-port-item { width: 440px; margin: 0 10px 20px; }
+  .wdv-port-item img { height: 340px; }
+  .wdv-port-overlay { height: 340px; }
+}
+@media (max-width: 768px) {
+  .wdv-port-item { width: 380px; margin: 0 8px 16px; }
+  .wdv-port-item img { height: 290px; }
+  .wdv-port-overlay { height: 290px; }
+}
+@media (max-width: 480px) {
+  .wdv-banner h1 { font-size: 1.6rem; }
+  .wdv-stats { grid-template-columns: 1fr; }
+  .wdv-port-item { width: 320px; margin: 0 6px 12px; }
+  .wdv-port-item img { height: 250px; }
+  .wdv-port-overlay { height: 250px; }
+}

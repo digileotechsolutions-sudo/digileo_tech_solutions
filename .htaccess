@@ -1,0 +1,167 @@
+# ==========================================
+# Digileo Tech Solutions - Production .htaccess
+# PERFORMANCE OPTIMIZED
+# ==========================================
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # Remove www
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # Custom 404
+  ErrorDocument 404 /404.php
+
+  # Block access to sensitive files
+  RewriteRule ^config/ - [F,L]
+  RewriteRule ^logs/ - [F,L]
+  RewriteRule ^\.env - [F,L]
+  RewriteRule ^composer\.json - [F,L]
+  RewriteRule ^package\.json - [F,L]
+
+  # Block .git access
+  RewriteRule ^\.git - [F,L]
+
+  # Prevent hotlinking (uncomment and set your domain)
+  # RewriteCond %{HTTP_REFERER} !^$
+  # RewriteCond %{HTTP_REFERER} !^https?://(www\.)?digileotechsolutions\.com [NC]
+  # RewriteRule \.(jpg|jpeg|png|gif|webp|svg)$ - [F,L]
+</IfModule>
+
+# ============ BROWSER CACHING ============
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML - short cache (revalidate always)
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # CSS, JS - 1 year (cache-bust via query string)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+
+  # Images - 1 year
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Fonts - 1 year
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+
+  # Documents - 1 month
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType application/json "access plus 1 month"
+</IfModule>
+
+# ============ CACHE CONTROL HEADERS ============
+<IfModule mod_headers.c>
+  # HTML - no cache (dynamic)
+  Header set Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate" "expr=%{CONTENT_TYPE} == 'text/html'"
+
+  # CSS, JS - immutable cache with versioning
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'text/css'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'text/javascript'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'application/javascript'"
+
+  # Images - cache for 1 year
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/jpg'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/jpeg'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/png'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/gif'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/webp'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'image/svg+xml'"
+
+  # Fonts - cache for 1 year
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'font/woff2'"
+  Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{CONTENT_TYPE} == 'font/woff'"
+
+  # Security Headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+
+  # HSTS (enable after confirming HTTPS works)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+  # Remove ETags (we use Cache-Control)
+  Header unset ETag
+  FileETag None
+
+  # Remove server signature
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+# ============ GZIP COMPRESSION ============
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ============ PREVENT ACCESS TO SENSITIVE FILES ============
+<FilesMatch "\.(env|md|log|sql|bak|config)$">
+  Require all denied
+</FilesMatch>
+
+# ============ DIRECTORY INDEX ============
+DirectoryIndex index.php
+
+# ============ PHP SETTINGS ============
+<IfModule mod_php.c>
+  # Hide PHP version for security
+  php_flag expose_php Off
+
+  # Prevent session ID in URLs
+  php_flag session.use_trans_sid Off
+
+  # Increase memory for image processing
+  php_value memory_limit 256M
+  php_value upload_max_filesize 50M
+  php_value post_max_size 55M
+  php_value max_execution_time 120
+  php_value max_input_time 120
+</IfModule>
+
+# ============ PREVENT DIRECTORY LISTING ============
+Options -Indexes
+
+# ============ SERVE WEBP IF AVAILABLE ============
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif)$
+  RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+  RewriteRule ^(.+)\.(jpg|jpeg|png|gif)$ $1.webp [T=image/webp,E=webp:1]
+</IfModule>

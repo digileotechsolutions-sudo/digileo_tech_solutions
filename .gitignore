@@ -1,0 +1,36 @@
+# Environment
+.env
+.env.local
+
+# Logs
+/logs/*
+!/logs/.gitkeep
+
+# Uploads
+/uploads/*
+!/uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# PHP
+/vendor/
+
+# Cache
+/cache/*
+!/cache/.gitkeep
+
+# Config override
+config/local.php
+
+# Deployment config
+.user.ini
