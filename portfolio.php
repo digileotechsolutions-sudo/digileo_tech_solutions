@@ -16,6 +16,22 @@
       <p>Explore our work across web, software, hardware, and print.</p>
     </div>
 
+    <div class="gd-portfolio-section">
+      <div class="gd-portfolio-header"><i class="fas fa-dumbbell" aria-hidden="true"></i> Featured Website</div>
+      <div class="projects-grid portfolio-featured-grid">
+        <a class="project-card-link" href="https://mackfastfitnesssolution.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit MackFast Fitness Solution website">
+          <div class="project-card fade-in">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
+            <span class="project-tag">Web Development</span>
+            <div class="project-overlay">
+              <h4>MackFast Fitness Solution</h4>
+              <p>Fitness Website · Visit Live Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
 <?php
 $pfCats = [
   'graphic-design'    => ['folder' => 'Graphic Design',      'icon' => 'fa-paint-brush', 'label' => 'Graphic Design',      'id' => 'pf-graphic-design',    'tags' => ['Logo Design', 'Brand Identity', 'Graphic']],

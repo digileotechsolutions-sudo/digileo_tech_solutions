@@ -137,6 +137,16 @@
       <p>Explore some of our recent work across various service categories.</p>
     </div>
     <div class="projects-grid">
+      <a class="project-card-link" href="https://mackfastfitnesssolution.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit MackFast Fitness Solution website">
+        <div class="project-card fade-in">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
+          <span class="project-tag">Web Development</span>
+          <div class="project-overlay">
+            <h4>MackFast Fitness Solution</h4>
+            <p>Fitness Website · Visit Live Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></p>
+          </div>
+        </div>
+      </a>
 <?php
 $homePfCats = [
   'Web Design'          => ['folder' => 'Web Design',          'tag' => 'Web Design',       'label' => 'Web Design'],
