@@ -63,7 +63,7 @@ $canonicalUrl = $protocol . '://' . $host . $uri;
   <noscript><link rel="stylesheet" href="<?= $basePath ?>css/<?= $currentPage ?>.css?v=1.0"></noscript>
 <?php endif; ?>
 <?php if ($currentPage === 'blog'): ?>
-  <link rel="stylesheet" href="<?= $basePath ?>css/blog.css?v=1.1">
+  <link rel="stylesheet" href="<?= $basePath ?>css/blog.css?v=1.2">
 <?php endif; ?>
   <link rel="stylesheet" href="<?= $basePath ?>whatsapp-chat/widget/widget.css?v=1.0" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="<?= $basePath ?>whatsapp-chat/widget/widget.css?v=1.0"></noscript>

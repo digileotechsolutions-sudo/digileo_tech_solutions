@@ -1,7 +1,6 @@
 <?php
 $pageTitle = 'Our Blog';
 $currentPage = 'blog';
-include 'inc/header.php';
 
 $articles = [
   [
@@ -398,10 +397,81 @@ $blogTags = [
   'payroll',
   'employee management',
 ];
+
+foreach ($articles as &$article) {
+  $article['slug'] = trim(preg_replace('/-+/', '-', preg_replace('/[^a-z0-9]+/', '-', strtolower($article['title']))), '-');
+}
+unset($article);
+
+$requestedArticle = $_GET['article'] ?? '';
+$selectedArticle = null;
+if (is_string($requestedArticle) && $requestedArticle !== '') {
+  foreach ($articles as $article) {
+    if ($article['slug'] === $requestedArticle && isset($article['body'])) {
+      $selectedArticle = $article;
+      break;
+    }
+  }
+}
+
+$pageTitle = $selectedArticle ? $selectedArticle['title'] : $pageTitle;
+include 'inc/header.php';
 ?>
 
 <main class="blog-page">
   <div class="container">
+<?php if ($selectedArticle):
+  $selectedImage = 'https://images.unsplash.com/' . $selectedArticle['image'] . '?auto=format&fit=crop&w=1800&q=85';
+  $paragraphs = preg_split('/\R\s*\R/', str_replace('\n', "\n", $selectedArticle['body']), -1, PREG_SPLIT_NO_EMPTY);
+  $sectionTitles = ['Introduction', 'Key considerations', 'Putting it into practice'];
+?>
+    <section class="blog-article-hero" aria-labelledby="article-title">
+      <img class="blog-article-hero-image" src="<?= htmlspecialchars($selectedImage, ENT_QUOTES, 'UTF-8') ?>" alt="" loading="eager" fetchpriority="high" decoding="async">
+      <div class="blog-article-hero-content">
+        <a class="blog-back-link" href="blog.php"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to blog</a>
+        <div class="blog-article-tags">
+<?php foreach ($selectedArticle['tags'] as $tag): ?>
+          <a href="blog.php?tag=<?= rawurlencode($tag) ?>"><?= htmlspecialchars($tag) ?></a>
+<?php endforeach; ?>
+        </div>
+        <h1 id="article-title"><?= htmlspecialchars($selectedArticle['title']) ?></h1>
+        <div class="blog-article-byline">
+          <span><i class="fas fa-user" aria-hidden="true"></i> <?= htmlspecialchars($selectedArticle['author']) ?></span>
+          <span><i class="far fa-calendar" aria-hidden="true"></i> <time><?= htmlspecialchars($selectedArticle['date']) ?></time></span>
+          <span><i class="far fa-clock" aria-hidden="true"></i> <?= max(1, (int)ceil(str_word_count(implode(' ', $paragraphs)) / 200)) ?> min read</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="blog-article-layout">
+      <article class="blog-article-content">
+        <p class="blog-article-lead"><?= htmlspecialchars($selectedArticle['summary']) ?></p>
+<?php foreach ($paragraphs as $paragraphIndex => $paragraph): ?>
+        <section id="article-section-<?= (int)$paragraphIndex ?>">
+<?php if ($paragraphIndex > 0): ?>
+          <h2><?= htmlspecialchars($sectionTitles[min($paragraphIndex, count($sectionTitles) - 1)]) ?></h2>
+<?php endif; ?>
+          <p><?= nl2br(htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8')) ?></p>
+        </section>
+<?php endforeach; ?>
+        <a class="blog-back-to-list" href="blog.php"><i class="fas fa-arrow-left" aria-hidden="true"></i> All articles</a>
+      </article>
+
+      <aside class="blog-article-aside">
+        <nav class="blog-article-toc" aria-label="On this page">
+          <h2><i class="fas fa-list" aria-hidden="true"></i> On this page</h2>
+<?php foreach ($paragraphs as $paragraphIndex => $paragraph): ?>
+          <a href="#article-section-<?= (int)$paragraphIndex ?>"><?= htmlspecialchars($sectionTitles[min($paragraphIndex, count($sectionTitles) - 1)]) ?></a>
+<?php endforeach; ?>
+        </nav>
+        <div class="blog-article-cta">
+          <h2>Need help with your next project?</h2>
+          <p>Talk to Digileo Tech about practical technology solutions for your business.</p>
+          <a href="quote.php" class="btn btn-primary btn-sm">Get a Quote <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </aside>
+    </div>
+<?php else: ?>
     <div class="blog-eyebrow"><i class="fas fa-newspaper" aria-hidden="true"></i> Blog</div>
     <section class="blog-intro" aria-labelledby="blog-title">
       <div>
@@ -435,7 +505,7 @@ $blogTags = [
       <section class="blog-results" aria-label="Blog articles">
         <p class="blog-results-count" data-blog-results aria-live="polite"><?= count($articles) ?> articles</p>
         <div class="blog-posts">
-<?php foreach ($articles as $articleIndex => $article):
+<?php foreach ($articles as $article):
   $articleTags = array_map('strtolower', $article['tags']);
   $searchText = strtolower($article['title'] . ' ' . $article['summary'] . ' ' . $article['category'] . ' ' . implode(' ', $article['tags']) . ' ' . ($article['body'] ?? ''));
   $imageUrl = 'https://images.unsplash.com/' . $article['image'] . '?auto=format&fit=crop&w=900&q=75';
@@ -460,10 +530,9 @@ $blogTags = [
                 <time><?= htmlspecialchars($article['date']) ?></time>
               </div>
 <?php if (isset($article['body'])): ?>
-              <details class="blog-article-details" id="article-content-<?= (int)$articleIndex ?>">
-                <summary>Read article <i class="fas fa-arrow-right" aria-hidden="true"></i></summary>
-                <div class="blog-article-body"><?= nl2br(htmlspecialchars(str_replace('\n', "\n", $article['body']), ENT_QUOTES, 'UTF-8')) ?></div>
-              </details>
+              <a class="blog-card-link" href="blog.php?article=<?= rawurlencode($article['slug']) ?>">
+                Read article <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              </a>
 <?php endif; ?>
 <?php if (isset($article['video'])): ?>
               <a class="blog-card-link" href="<?= htmlspecialchars($article['video'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer">
@@ -478,6 +547,7 @@ $blogTags = [
       </section>
     </div>
   </div>
+<?php endif; ?>
 </main>
 
 <?php include 'inc/footer.php'; ?>
