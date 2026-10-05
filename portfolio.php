@@ -54,6 +54,12 @@ foreach ($pfCats as $dir => $cat):
             <div class="gd-card-info"><h4>MackFast Fitness Solution</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
             <div class="gd-gallery-overlay"><h4>MackFast Fitness Solution</h4><span>Web Development · Visit Live Website</span></div>
           </a>
+          <a class="gd-gallery-item fade-in" href="https://bosrenadventures.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Bosren Adventures website">
+            <span class="gd-gallery-tag">Travel Website</span>
+            <img class="gd-card-img" src="https://bosrenadventures.co.ke/img/featured-trips/maasai-mara-big-five-safari.jpg" alt="Maasai Mara Big Five safari tour in Kenya" loading="lazy" decoding="async">
+            <div class="gd-card-info"><h4>Bosren Adventures</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
+            <div class="gd-gallery-overlay"><h4>Bosren Adventures</h4><span>Web Development · Visit Live Website</span></div>
+          </a>
 <?php endif; ?>
           <!-- dup -->
 <?php
@@ -76,6 +82,12 @@ foreach ($pfCats as $dir => $cat):
             <img class="gd-card-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Modern fitness center with gym equipment" width="900" height="600" loading="lazy" decoding="async">
             <div class="gd-card-info"><h4>MackFast Fitness Solution</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
             <div class="gd-gallery-overlay"><h4>MackFast Fitness Solution</h4><span>Web Development · Visit Live Website</span></div>
+          </a>
+          <a class="gd-gallery-item fade-in" href="https://bosrenadventures.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Bosren Adventures website">
+            <span class="gd-gallery-tag">Travel Website</span>
+            <img class="gd-card-img" src="https://bosrenadventures.co.ke/img/featured-trips/maasai-mara-big-five-safari.jpg" alt="Maasai Mara Big Five safari tour in Kenya" loading="lazy" decoding="async">
+            <div class="gd-card-info"><h4>Bosren Adventures</h4><span class="gd-category">Web Development · Visit Website <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span></div>
+            <div class="gd-gallery-overlay"><h4>Bosren Adventures</h4><span>Web Development · Visit Live Website</span></div>
           </a>
 <?php endif; ?>
         </div>
